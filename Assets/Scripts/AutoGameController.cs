@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoGameController : MonoBehaviour
 {
-
+    public bool play;
+    public bool isPaused;
     public GameObject[] disks;
     Vector3 waypointA;
     Vector3 waypointB;
@@ -17,9 +19,12 @@ public class AutoGameController : MonoBehaviour
     public int n = 6;
     public float speed = 1;
     int state = 0;
+    
     // Use this for initialization
     void Start()
     {
+        play = false;
+        isPaused = false;
         waypointA = GameObject.Find("wayPoint A").transform.position;
         waypointB = GameObject.Find("wayPoint B").transform.position;
         waypointC = GameObject.Find("wayPoint C").transform.position;
@@ -33,7 +38,7 @@ public class AutoGameController : MonoBehaviour
         {
             Debug.Log("Move disk " + diskSeq[i] + " from " + posASeq[i] + " to " + posBSeq[i]);
         }
-        StartCoroutine(moveAll());
+        
     }
 
     // Update is called once per frame
@@ -51,11 +56,41 @@ public class AutoGameController : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Pow(2, n) - 1; i++)
         {
+            Debug.Log(i);
+            while (isPaused)
+            {
+                yield return new WaitForSeconds(0.2f);
+                //yield return StartCoroutine(setPauseEnable());
+            }
             yield return StartCoroutine(move(diskSeq[i], posASeq[i], posBSeq[i]));
             if (i == Mathf.Pow(2, n) - 3)
-                state++;
+            state++;
         }
+    }
 
+    IEnumerator setPauseEnable()
+    {
+        yield return new WaitWhile(() => isPaused == false);
+    }
+
+    public void setPlayStatus()
+    {
+       if (isPaused == false)
+       {
+           StartCoroutine(moveAll());
+       }
+       else
+       {
+            Debug.Log("before:"+ isPaused);
+            isPaused = false;
+            Debug.Log("after: " + isPaused);
+       }
+        
+    }
+
+    public void setStopStatus()
+    {
+        isPaused = true;
     }
 
     void hanoi(int n, Vector3 from, Vector3 to, Vector3 aux)
