@@ -9,10 +9,13 @@ public class GameToH : MonoBehaviour
     public Vector3[] poleBpositions;
     public Vector3[] poleCpositions;
 
+    private int count;
+
     // Start is called before the first frame update
     void Start()
     {
         roomScaleVector = new Vector3(10f, 0, 10f);
+        count = 0;
     }
 
     // Update is called once per frame
@@ -34,5 +37,41 @@ public class GameToH : MonoBehaviour
     public Vector3 getPoleCposition(int i)
     {
         return poleCpositions[i];
+    }
+
+    public void getSpecificPoleBPositions()
+    {
+        Debug.Log("Counter" + count);
+        count++;
+        /**
+        Debug.Log("Counter: " + count);
+        Vector3 newCoords;
+        if (other.gameObject.name == "Disc3" || other.gameObject.name == "Disc2" || other.gameObject.name == "Disc1")
+        {
+            switch (count)
+            {
+                case 0:
+                    newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleBposition(0);
+                    newCoords.x = newCoords.x + 10f;
+                    newCoords.z = newCoords.z + 10f;
+                    other.gameObject.transform.position = newCoords;
+                    Debug.Log(newCoords);
+                    break;
+                case 1:
+                    newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleBposition(1);
+                    newCoords.x = newCoords.x + 10f;
+                    newCoords.z = newCoords.z + 10f;
+                    other.gameObject.transform.position = newCoords;
+                    break;
+                case 2:
+                    newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleBposition(2);
+                    newCoords.x = newCoords.x + 10f;
+                    newCoords.z = newCoords.z + 10f;
+                    other.gameObject.transform.position = newCoords;
+                    break;
+            }
+            count++;
+        }
+    **/
     }
 }
