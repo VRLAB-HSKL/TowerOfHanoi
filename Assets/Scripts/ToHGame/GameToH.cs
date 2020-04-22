@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameToH : MonoBehaviour
@@ -10,10 +11,12 @@ public class GameToH : MonoBehaviour
     public Vector3[] poleCpositions;
 
     private int count;
+    private Vector3 oldPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        oldPosition = new Vector3(0, 0, 0);
         roomScaleVector = new Vector3(10f, 0, 10f);
         count = 0;
     }
@@ -73,5 +76,41 @@ public class GameToH : MonoBehaviour
             count++;
         }
     **/
+    }
+
+    public void setOldDiscPosition(Vector3 _oldPosition)
+    {
+        oldPosition = _oldPosition;
+        Debug.Log("GameToH-oldPosition: " + oldPosition.ToString());
+    }
+
+    public Vector3 getOldDiscPosition()
+    {
+        return oldPosition;
+    }
+
+    public bool checkDiscPositions(List<GameObject> gameobjects)
+    {
+        if (!gameobjects.Any()) return true;
+
+        if (gameobjects.Count == 1)
+        {
+            return true;
+        }
+        else
+        {
+            GameObject[] array = gameobjects.ToArray();
+            for (int i = 0; i <= array.Length; i++)
+            {
+                if (array[i].gameObject.name == "Disc3") return false;
+                if(array[i].gameObject.transform.localScale.x < array[i+1].gameObject.transform.localScale.x)
+                {
+                    Debug.Log("Scale.x[1]: " + array[i].gameObject.transform.localScale.x + " ; Scale.x[2]:" + array[i + 1].gameObject.transform.localScale.x);
+                    return false;
+                }
+            }
+
+            return true;
+        }       
     }
 }

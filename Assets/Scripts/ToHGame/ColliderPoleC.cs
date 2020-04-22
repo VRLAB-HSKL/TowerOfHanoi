@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderPoleA : MonoBehaviour
+public class ColliderPoleC : MonoBehaviour
 {
     Renderer rend;
     private int count;
 
+    public List<GameObject> discPositions;
     private void Start()
     {
         rend = GetComponent<Renderer>();
         count = 0;
+        discPositions = new List<GameObject>();
     }
 
 
@@ -21,6 +23,7 @@ public class ColliderPoleA : MonoBehaviour
         rend.material.color = Color.green;
         if (other.gameObject.name == "Disc3" || other.gameObject.name == "Disc2" || other.gameObject.name == "Disc1")
         {
+            discPositions.Add(other.gameObject);
             Destroy(other.gameObject.GetComponent<BasicGrabbable>());
             other.gameObject.transform.position = discState(other.gameObject.name);
             other.gameObject.AddComponent<BasicGrabbable>();
@@ -30,24 +33,25 @@ public class ColliderPoleA : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        
         /**
         if (other.gameObject.name == "Disc3")
         {
-            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(2);
+            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleCposition(2);
             newCoords.x = newCoords.x + 10f;
             newCoords.z = newCoords.z + 10f;
             other.gameObject.transform.position = newCoords;
         }
         if (other.gameObject.name == "Disc2")
         {
-            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(1);
+            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleCposition(1);
             newCoords.x = newCoords.x + 10f;
             newCoords.z = newCoords.z + 10f;
             other.gameObject.transform.position = newCoords;
         }
         if (other.gameObject.name == "Disc1")
         {
-            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(0);
+            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleCposition(0);
             newCoords.x = newCoords.x + 10f;
             newCoords.z = newCoords.z + 10f;
             other.gameObject.transform.position = newCoords;
@@ -61,7 +65,9 @@ public class ColliderPoleA : MonoBehaviour
         rend.material.color = Color.white;
         if (other.gameObject.name == "Disc3" || other.gameObject.name == "Disc2" || other.gameObject.name == "Disc1")
         {
+            GameObject.Find("ToH").GetComponent<GameToH>().setOldDiscPosition(other.gameObject.transform.position);
             count--;
+            discPositions.Remove(other.gameObject);
         }
     }
 
@@ -71,20 +77,20 @@ public class ColliderPoleA : MonoBehaviour
         switch (count)
         {
             case 0:
-                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(0);
+                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleCposition(0);
                 newCoords.x = newCoords.x + 10f;
                 newCoords.z = newCoords.z + 10f;
                 //other.gameObject.transform.position = newCoords;
                 Debug.Log(newCoords);
                 break;
             case 1:
-                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(1);
+                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleCposition(1);
                 newCoords.x = newCoords.x + 10f;
                 newCoords.z = newCoords.z + 10f;
                 //other.gameObject.transform.position = newCoords;
                 break;
             case 2:
-                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(2);
+                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleCposition(2);
                 newCoords.x = newCoords.x + 10f;
                 newCoords.z = newCoords.z + 10f;
                 //other.gameObject.transform.position = newCoords;
@@ -92,5 +98,10 @@ public class ColliderPoleA : MonoBehaviour
         }
 
         return newCoords;
+    }
+
+    private void checkPosition()
+    {
+
     }
 }
