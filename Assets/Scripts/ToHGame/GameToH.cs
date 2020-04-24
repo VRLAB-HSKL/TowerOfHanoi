@@ -2,41 +2,84 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
+/// <summary>
+/// 
+/// </summary>
 public class GameToH : MonoBehaviour
 {
+  
+    #region Variables
+
+    //
     public Vector3[] poleApositions;
+    
+    //
     public Vector3[] poleBpositions;
+    
+    //
     public Vector3[] poleCpositions;
+    
+    //
     public GameObject Discs_3;
+    
+    //
     public GameObject Discs_5;
+    
+    //
     public GameObject Discs_7;
+    
+    //
     public GameObject Pole_A;
+    
+    //
     public GameObject Pole_B;
+    
+    //
     public GameObject Pole_C;
 
-    private int count;
+    //
     private Vector3 oldPosition;
 
+
+    #endregion
+
+    #region Unity-Standard-Methods
+
     // Start is called before the first frame update
+    /// <summary>
+    /// 
+    /// </summary>
     void Start()
     {
         oldPosition = new Vector3(0, 0, 0);
-        count = 0;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Awake()
     {
         ChangingGameState(-1);
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// 
+    /// </summary>
     void Update()
     {
         
     }
 
+    #endregion
+
+    #region ChangeGameState-Methods
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="DiscState"></param>
     public void ChangingGameState(int DiscState)
     {
         if(DiscState == -1 )
@@ -55,6 +98,11 @@ public class GameToH : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="DiscState"></param>
     private void SwitchGameState(int DiscState)
     {
         switch (DiscState)
@@ -65,7 +113,14 @@ public class GameToH : MonoBehaviour
             default: break;
         }
     }
+    #endregion
 
+    #region Coroutines
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator disablePoles()
     {
         Destroy(Pole_A.GetComponent<ColliderPoleA>());
@@ -77,6 +132,10 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator enablePoles()
     {
         Pole_A.AddComponent<ColliderPoleA>();
@@ -88,6 +147,10 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator startGameWithDiscOfThree()
     {
         Discs_5.SetActive(false);
@@ -98,6 +161,10 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator startGameWithDiscOfFive()
     {
         Discs_3.SetActive(false);
@@ -108,6 +175,10 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator startGameWithDiscOfSeven()
     {
         Discs_3.SetActive(false);
@@ -118,6 +189,10 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator fillDisc3Positions()
     {
         poleApositions = new Vector3[3];
@@ -142,6 +217,10 @@ public class GameToH : MonoBehaviour
         yield return new WaitForSeconds(2f);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator fillDisc5Positions()
     {
         poleApositions = new Vector3[5];
@@ -175,6 +254,10 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator fillDisc7Positions()
     {
         poleApositions = new Vector3[7];
@@ -217,70 +300,65 @@ public class GameToH : MonoBehaviour
         yield return null;
     }
 
-    public Vector3 getPoleAposition(int i)
+    #endregion
+
+    #region Getter / Setter Disc-Positions
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="i"></param>
+    /// <returns></returns>
+    public Vector3 GetPoleAposition(int i)
     {
         Debug.Log(i);
         return poleApositions[i];
     }
 
-    public Vector3 getPoleBposition(int i)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="i"></param>
+    /// <returns></returns>
+    public Vector3 GetPoleBposition(int i)
     {
         return poleBpositions[i];
     }
 
-    public Vector3 getPoleCposition(int i)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="i"></param>
+    /// <returns></returns>
+    public Vector3 GetPoleCposition(int i)
     {
         return poleCpositions[i];
     }
-
-    public void getSpecificPoleBPositions()
-    {
-        Debug.Log("Counter" + count);
-        count++;
-        /**
-        Debug.Log("Counter: " + count);
-        Vector3 newCoords;
-        if (other.gameObject.name == "Disc3" || other.gameObject.name == "Disc2" || other.gameObject.name == "Disc1")
-        {
-            switch (count)
-            {
-                case 0:
-                    newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleBposition(0);
-                    newCoords.x = newCoords.x + 10f;
-                    newCoords.z = newCoords.z + 10f;
-                    other.gameObject.transform.position = newCoords;
-                    Debug.Log(newCoords);
-                    break;
-                case 1:
-                    newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleBposition(1);
-                    newCoords.x = newCoords.x + 10f;
-                    newCoords.z = newCoords.z + 10f;
-                    other.gameObject.transform.position = newCoords;
-                    break;
-                case 2:
-                    newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleBposition(2);
-                    newCoords.x = newCoords.x + 10f;
-                    newCoords.z = newCoords.z + 10f;
-                    other.gameObject.transform.position = newCoords;
-                    break;
-            }
-            count++;
-        }
-    **/
-    }
-
-    public void setOldDiscPosition(Vector3 _oldPosition)
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_oldPosition"></param>
+    public void SetOldDiscPosition(Vector3 _oldPosition)
     {
         oldPosition = _oldPosition;
         Debug.Log("GameToH-oldPosition: " + oldPosition.ToString());
     }
 
-    public Vector3 getOldDiscPosition()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetOldDiscPosition()
     {
         return oldPosition;
     }
 
-    public bool checkDiscPositions(List<GameObject> gameobjects)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="gameobjects"></param>
+    /// <returns></returns>
+    public bool CheckDiscPositions(List<GameObject> gameobjects)
     {
         if (!gameobjects.Any()) return true;
 
@@ -293,7 +371,6 @@ public class GameToH : MonoBehaviour
             GameObject[] array = gameobjects.ToArray();
             for (int i = 0; i < array.Length-1; i++)
             {
-                //if (array[i].gameObject.name == "Disc3") return false;
                 if(array[i].gameObject.transform.localScale.x < array[i+1].gameObject.transform.localScale.x)
                 {
                     Debug.Log("Scale.x[1]: " + array[i].gameObject.transform.localScale.x + " ; Scale.x[2]:" + array[i + 1].gameObject.transform.localScale.x);
@@ -304,4 +381,6 @@ public class GameToH : MonoBehaviour
             return true;
         }       
     }
+    #endregion
+
 }
