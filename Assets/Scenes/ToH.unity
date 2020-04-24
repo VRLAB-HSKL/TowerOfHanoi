@@ -564,6 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d577e4a5bffc3f4cb8bc99647227c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  count: 0
   discPositions: []
 --- !u!54 &119220701
 Rigidbody:
@@ -1449,6 +1450,12 @@ MonoBehaviour:
   - {x: 0.6, y: 1.05, z: 0.5}
   - {x: 0.6, y: 1.15, z: 0.5}
   - {x: 0.6, y: 1.25, z: 0.5}
+  Discs_3: {fileID: 65729576}
+  Discs_5: {fileID: 788840228173812809}
+  Discs_7: {fileID: 1534273736}
+  Pole_A: {fileID: 119220695}
+  Pole_B: {fileID: 1871840454}
+  Pole_C: {fileID: 838241084}
 --- !u!114 &740928469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3418,6 +3425,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 740928467}
     m_Modifications:
+    - target: {fileID: 59933064928607716, guid: 478ea10f4983775429918f9d811638b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 59933065041571746, guid: 478ea10f4983775429918f9d811638b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
     - target: {fileID: 59933065053309320, guid: 478ea10f4983775429918f9d811638b7,
         type: 3}
       propertyPath: m_Name
@@ -3426,7 +3443,12 @@ PrefabInstance:
     - target: {fileID: 59933065053309320, guid: 478ea10f4983775429918f9d811638b7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 59933065053309320, guid: 478ea10f4983775429918f9d811638b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Discs
       objectReference: {fileID: 0}
     - target: {fileID: 59933065053309321, guid: 478ea10f4983775429918f9d811638b7,
         type: 3}
@@ -3482,6 +3504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 59933065643391828, guid: 478ea10f4983775429918f9d811638b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
       objectReference: {fileID: 0}
     - target: {fileID: 59933065643391830, guid: 478ea10f4983775429918f9d811638b7,
         type: 3}
@@ -3505,7 +3532,27 @@ PrefabInstance:
     - target: {fileID: 1084301818958730835, guid: f973a1280380c1c4db5db78d7692e634,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1084301818958730835, guid: f973a1280380c1c4db5db78d7692e634,
+        type: 3}
+      propertyPath: m_TagString
+      value: Discs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987373872881487177, guid: f973a1280380c1c4db5db78d7692e634,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443006334256830763, guid: f973a1280380c1c4db5db78d7692e634,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487928257928968787, guid: f973a1280380c1c4db5db78d7692e634,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
       objectReference: {fileID: 0}
     - target: {fileID: 7742299627453316522, guid: f973a1280380c1c4db5db78d7692e634,
         type: 3}
@@ -3562,6 +3609,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8082539187438274569, guid: f973a1280380c1c4db5db78d7692e634,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625292052457200749, guid: f973a1280380c1c4db5db78d7692e634,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f973a1280380c1c4db5db78d7692e634, type: 3}
 --- !u!4 &788840228173812808 stripped
@@ -3583,6 +3640,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 740928467}
     m_Modifications:
+    - target: {fileID: 6796562731964907172, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
     - target: {fileID: 6796562732037294134, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3647,6 +3709,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562732037294135, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Discs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562732194754320, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562732256291040, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562732358202622, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562732514094956, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562733189833199, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796562733346901499, guid: 8ae9d38888f6c6349ad16fcab52f3ca0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Disc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ae9d38888f6c6349ad16fcab52f3ca0, type: 3}

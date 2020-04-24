@@ -8,7 +8,7 @@ using UnityEngine;
 public class ColliderPoleA : MonoBehaviour
 {
     Renderer rend;
-    private int count;
+    public int count;
     public List<GameObject> discPositions;
    
     private void Start()
@@ -18,55 +18,34 @@ public class ColliderPoleA : MonoBehaviour
         discPositions = new List<GameObject>();
     }
 
+    public void setNewCounter(int counter)
+    {
+        count = counter;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
        Debug.Log("Hit: " + other.gameObject.name.ToString());
        rend.material.color = Color.green;
-       if (other.gameObject.name == "Disc3" || other.gameObject.name == "Disc2" || other.gameObject.name == "Disc1")
-       {
+       if(other.gameObject.tag == "Disc")
+        {
             discPositions.Add(other.gameObject);
             Destroy(other.gameObject.GetComponent<BasicGrabbable>());
-            other.gameObject.transform.position = discState(other.gameObject.name);
+            other.gameObject.transform.position = GetDiscPositions();
             other.gameObject.AddComponent<BasicGrabbable>();
             count++;
-       }
+            Debug.Log(count);
+            StartCoroutine(CheckGameState(other));
+        }
       
         
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        /**
-        if (other.gameObject.name == "Disc3")
-        {
-            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(2);
-            newCoords.x = newCoords.x + 10f;
-            newCoords.z = newCoords.z + 10f;
-            other.gameObject.transform.position = newCoords;
-        }
-        if (other.gameObject.name == "Disc2")
-        {
-            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(1);
-            newCoords.x = newCoords.x + 10f;
-            newCoords.z = newCoords.z + 10f;
-            other.gameObject.transform.position = newCoords;
-        }
-        if (other.gameObject.name == "Disc1")
-        {
-            Vector3 newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(0);
-            newCoords.x = newCoords.x + 10f;
-            newCoords.z = newCoords.z + 10f;
-            other.gameObject.transform.position = newCoords;
-        }
-        //other.gameObject.transform.position = new Vector3(10f, 1.0348f, 10.5f);
-    **/
     }
 
     private void OnTriggerExit(Collider other)
     {
         rend.material.color = Color.white;
-        if (other.gameObject.name == "Disc3" || other.gameObject.name == "Disc2" || other.gameObject.name == "Disc1")
+        if (other.gameObject.tag == "Disc")
         {
             GameObject.Find("ToH").GetComponent<GameToH>().setOldDiscPosition(other.gameObject.transform.position);
             count--;
@@ -75,30 +54,30 @@ public class ColliderPoleA : MonoBehaviour
         }
     }
 
-    private Vector3 discState(string name)
+    IEnumerator CheckGameState(Collider other)
+    {
+        bool gameFlag = GameObject.Find("ToH").GetComponent<GameToH>().checkDiscPositions(discPositions);
+        Debug.Log("GameFlag: " + gameFlag);
+        if (!gameFlag)
+        {
+            other.gameObject.transform.position = GameObject.Find("ToH").GetComponent<GameToH>().getOldDiscPosition();
+        }
+        yield return new WaitForSeconds(.1f);
+    }
+
+    private Vector3 GetDiscPositions()
     {
         Vector3 newCoords = new Vector3(0, 0, 0);
         switch (count)
         {
-            case 0:
-                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(0);
-                newCoords.x = newCoords.x + 10f;
-                newCoords.z = newCoords.z + 10f;
-                //other.gameObject.transform.position = newCoords;
-                Debug.Log(newCoords);
-                break;
-            case 1:
-                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(1);
-                newCoords.x = newCoords.x + 10f;
-                newCoords.z = newCoords.z + 10f;
-                //other.gameObject.transform.position = newCoords;
-                break;
-            case 2:
-                newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(2);
-                newCoords.x = newCoords.x + 10f;
-                newCoords.z = newCoords.z + 10f;
-                //other.gameObject.transform.position = newCoords;
-                break;
+            case 0: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(0); break;
+            case 1: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(1); break;
+            case 2: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(2); break;
+            case 3: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(3); break;
+            case 4: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(4); break;
+            case 5: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(5); break;
+            case 6: newCoords = GameObject.Find("ToH").GetComponent<GameToH>().getPoleAposition(6); break;
+            
         }
 
         return newCoords;
