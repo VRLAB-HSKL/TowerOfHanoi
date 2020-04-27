@@ -49,6 +49,7 @@ public class ColliderPoleB : MonoBehaviour
         if (other.gameObject.tag == "Disc")
         {
             discPositions.Add(other.gameObject);
+            other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
             Destroy(other.gameObject.GetComponent<BasicGrabbable>());
             other.gameObject.transform.position = GetDiscPositions();
             other.gameObject.AddComponent<BasicGrabbable>();
@@ -68,7 +69,8 @@ public class ColliderPoleB : MonoBehaviour
         rend.material.color = Color.white;
         if (other.gameObject.tag == "Disc")
         {
-            GameObject.Find("ToH").GetComponent<GameToH>().SetOldDiscPosition(other.gameObject.transform.position);
+            //GameObject.Find("ToH").GetComponent<GameToH>().SetOldDiscPosition(other.gameObject.transform.position);
+            //GameObject.Find("ToH").GetComponent<GameToH>().SetOldDiscPosition(other.transform.localPosition);
             count--;
             discPositions.Remove(other.gameObject);
         }
@@ -90,7 +92,11 @@ public class ColliderPoleB : MonoBehaviour
         Debug.Log("GameFlag: " + gameFlag);
         if (!gameFlag)
         {
-            other.gameObject.transform.position = GameObject.Find("ToH").GetComponent<GameToH>().GetOldDiscPosition();
+            //other.gameObject.transform.position = GameObject.Find("ToH").GetComponent<GameToH>().GetOldDiscPosition();
+            other.gameObject.transform.position = GameObject.Find("ToH").GetComponent<DiscPositioning>().getPositions(other.gameObject.name);
+        } else
+        {
+            GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(other.transform.position, other.name);
         }
         yield return new WaitForSeconds(.1f);
     }

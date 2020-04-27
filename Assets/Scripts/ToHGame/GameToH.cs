@@ -214,6 +214,10 @@ public class GameToH : MonoBehaviour
         poleCpositions[0] = (fillVec + 2 * scale_x);
         poleCpositions[1] = (fillVec1 + 2 * scale_x);
         poleCpositions[2] = (fillVec2 + 2 * scale_x);
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[0], "Disc1");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[1], "Disc2");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[2], "Disc3");
+        
         yield return new WaitForSeconds(2f);
     }
 
@@ -251,6 +255,12 @@ public class GameToH : MonoBehaviour
         poleCpositions[2] = (fillVec2 + 2 * scale_x);
         poleCpositions[3] = (fillVec3 + 2 * scale_x);
         poleCpositions[4] = (fillVec4 + 2 * scale_x);
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[0], "Disc1");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[1], "Disc2");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[2], "Disc3");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[3], "Disc4");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[4], "Disc5");
+        
         yield return null;
     }
 
@@ -288,7 +298,7 @@ public class GameToH : MonoBehaviour
         poleBpositions[4] = (fillVec4 + scale_x);
         poleBpositions[5] = (fillVec5 + scale_x);
         poleBpositions[6] = (fillVec6 + scale_x);
-       
+
 
         poleCpositions[0] = (fillVec + 2 * scale_x);
         poleCpositions[1] = (fillVec1 + 2 * scale_x);
@@ -297,6 +307,14 @@ public class GameToH : MonoBehaviour
         poleCpositions[4] = (fillVec4 + 2 * scale_x);
         poleCpositions[5] = (fillVec5 + 2 * scale_x);
         poleCpositions[6] = (fillVec6 + 2 * scale_x);
+
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[0], "Disc1");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[1], "Disc2");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[2], "Disc3");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[3], "Disc4");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[4], "Disc5");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[5], "Disc6");
+        GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[6], "Disc7");
         yield return null;
     }
 

@@ -177,6 +177,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbfd31aaac017204885fcc03f0579a1a, type: 3}
+--- !u!4 &8098466 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 431768, guid: cbfd31aaac017204885fcc03f0579a1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8098465}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &65507092
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,9 +476,9 @@ GameObject:
   - component: {fileID: 119220696}
   - component: {fileID: 119220699}
   - component: {fileID: 119220698}
-  - component: {fileID: 119220700}
   - component: {fileID: 119220701}
   - component: {fileID: 119220697}
+  - component: {fileID: 119220700}
   m_Layer: 0
   m_Name: Pole_A
   m_TagString: Untagged
@@ -1398,6 +1404,7 @@ GameObject:
   - component: {fileID: 740928467}
   - component: {fileID: 740928468}
   - component: {fileID: 740928469}
+  - component: {fileID: 740928470}
   m_Layer: 0
   m_Name: ToH
   m_TagString: Untagged
@@ -1471,6 +1478,19 @@ MonoBehaviour:
   Discs_3: {fileID: 65729576}
   Discs_5: {fileID: 788840228173812809}
   Discs_7: {fileID: 1534273736}
+--- !u!114 &740928470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740928466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc30ae9641d16e4f8ec18baa5863d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disc3positions: []
 --- !u!1 &742340074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,8 +1613,8 @@ GameObject:
   - component: {fileID: 838241088}
   - component: {fileID: 838241087}
   - component: {fileID: 838241086}
-  - component: {fileID: 838241089}
   - component: {fileID: 838241090}
+  - component: {fileID: 838241089}
   m_Layer: 0
   m_Name: Pole_C
   m_TagString: Untagged
@@ -2128,6 +2148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1285476813}
+  - component: {fileID: 1285476814}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -2160,6 +2181,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1285476814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285476812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f753025abc16bb45bbc83939f863bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 672125239}
+  pivot: {fileID: 8098466}
+  fadeDuration: 0.3
+  m_reticleMaterial: {fileID: 0}
+  teleportButton: 1
 --- !u!1001 &1326235090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2966,8 +3004,8 @@ GameObject:
   - component: {fileID: 1871840458}
   - component: {fileID: 1871840457}
   - component: {fileID: 1871840456}
-  - component: {fileID: 1871840459}
   - component: {fileID: 1871840460}
+  - component: {fileID: 1871840459}
   m_Layer: 0
   m_Name: Pole_B
   m_TagString: Untagged
