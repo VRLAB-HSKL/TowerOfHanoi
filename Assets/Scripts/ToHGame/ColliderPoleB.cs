@@ -86,23 +86,29 @@ public class ColliderPoleB : MonoBehaviour
 
     IEnumerator DeleteDragItemSkript(Collider other)
     {
-        switch (other.gameObject.name)
+        Destroy(other.gameObject.GetComponent<DragItem>());
+        /**
+        switch(other.gameObject.name) 
         {
-            case "Disc1": Destroy(other.gameObject.GetComponent<DragItemDiscOne>()); break;
+            case "Disc1": Destroy(other.gameObject.GetComponent <DragItemDiscOne>()); break;
             case "Disc2": Destroy(other.gameObject.GetComponent<DragItemDiscTwo>()); break;
             case "Disc3": Destroy(other.gameObject.GetComponent<DragItemDiscThree>()); break;
         }
+    */
         yield return null;
     }
 
     IEnumerator AddDragItemSkript(Collider other)
     {
+        other.gameObject.AddComponent<DragItem>();
+        /**
         switch (other.gameObject.name)
         {
             case "Disc1": other.gameObject.AddComponent<DragItemDiscOne>(); break;
             case "Disc2": other.gameObject.AddComponent<DragItemDiscTwo>(); break;
             case "Disc3": other.gameObject.AddComponent<DragItemDiscThree>(); break;
         }
+        */
         yield return null;
     }
 

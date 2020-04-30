@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DragItemDiscOne : MonoBehaviour
+public class DragItem : MonoBehaviour
 {
     private bool isOver;
     private bool up;
     private Vector3 startPosition;
-    public GameObject item;
+    private GameObject item;
 
     void Awake()
     {
@@ -41,7 +40,7 @@ public class DragItemDiscOne : MonoBehaviour
     void OnMouseUp()
     {
         up = true;
-       // Vector3 pos = new Vector3(item.transform.position.x, 1.5f, item.transform.position.z);
+        // Vector3 pos = new Vector3(item.transform.position.x, 1.5f, item.transform.position.z);
         //item.transform.position = pos;
     }
 
