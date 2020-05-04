@@ -2,24 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
 public class GvRChangeGameState : MonoBehaviour
 {
+    // This Variable is used to switch between 3, 5 and 7 Discs
     public int changeState;
 
+    /// <summary>
+    /// Init with 0 => Initial play with 3 Discs
+    /// changeState = 0 => 3 Discs
+    /// changeState = 1 => 5 Discs
+    /// changeState = 2 => 7 Discs
+    /// </summary>
     private void Awake()
     {
         changeState = 0;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void Red()
     {
         GetComponent<Renderer>().material.color = Color.red;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Blue()
     {
         GetComponent<Renderer>().material.color = Color.blue;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void ChangeGameState()
     {
         GetComponent<Renderer>().material.color = Color.black;
