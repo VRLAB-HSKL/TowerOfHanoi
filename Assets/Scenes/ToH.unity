@@ -1559,6 +1559,7 @@ MonoBehaviour:
   Pole_A: {fileID: 119220695}
   Pole_B: {fileID: 1871840454}
   Pole_C: {fileID: 838241084}
+  maxDiscStackSize: 0
 --- !u!114 &740928469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,9 +1572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fc7ae6d7266314fbd7d5966d1d0768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Discs_3: {fileID: 65729576}
-  Discs_5: {fileID: 788840228173812809}
-  Discs_7: {fileID: 1534273736}
 --- !u!114 &740928470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,7 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc30ae9641d16e4f8ec18baa5863d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disc3positions: []
+  discPositions: []
 --- !u!1 &742340074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &742340075
 Transform:
   m_ObjectHideFlags: 0
@@ -1865,6 +1863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903140de8f87bcb43be498fb57e43b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actualGameStackSize: 0
   discPositions: []
 --- !u!54 &838241090
 Rigidbody:
@@ -2232,7 +2231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1196058448}
   m_Layer: 0
-  m_Name: GVR-CameraRig
+  m_Name: GVRCameraRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2959,7 +2958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.x
