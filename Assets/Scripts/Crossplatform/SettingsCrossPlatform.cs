@@ -16,6 +16,7 @@ public class SettingsCrossPlatform
     public static GameObject GvrEditorEmulator;
     public static GameObject GvrCameraRig;
     public static GameObject GvrEventSystem;
+    public static GameObject GvrButton;
 
     
     static SettingsCrossPlatform()
@@ -29,8 +30,9 @@ public class SettingsCrossPlatform
         FPSController = FindGameObjectByName("FPSController");
         VROrigins = FindGameObjectByName("VROrigins");
         GvrEditorEmulator = FindGameObjectByName("GvrEditorEmulator");
-        GvrCameraRig = FindGameObjectByName("GvrCameraRig");
+        GvrCameraRig = FindGameObjectByName("GVRCameraRig");
         GvrEventSystem = FindGameObjectByName("GvrEventSystem");
+        GvrButton = FindGameObjectByName("GvrButton");
     }
 
     [MenuItem(menuTitel + "/" + "Target PC Standalone")]
@@ -41,7 +43,7 @@ public class SettingsCrossPlatform
         GvrEditorEmulator.SetActive(false);
         GvrCameraRig.SetActive(false);
         GvrEventSystem.SetActive(false);
-
+        GvrButton.SetActive(false);
     }
 
     [MenuItem(menuTitel + "/" + "Target PC-Vive")]
@@ -52,6 +54,7 @@ public class SettingsCrossPlatform
         GvrEditorEmulator.SetActive(false);
         GvrCameraRig.SetActive(false);
         GvrEventSystem.SetActive(false);
+        GvrButton.SetActive(false);
     }
 
     [MenuItem(menuTitel + "/" + "Target ViveFocus (Android)")]
@@ -62,6 +65,7 @@ public class SettingsCrossPlatform
         GvrEditorEmulator.SetActive(false);
         GvrCameraRig.SetActive(false);
         GvrEventSystem.SetActive(false);
+        GvrButton.SetActive(false);
     }
 
     [MenuItem(menuTitel + "/" + "Target Cardboard (Android)")]
@@ -72,6 +76,7 @@ public class SettingsCrossPlatform
         GvrEditorEmulator.SetActive(true);
         GvrCameraRig.SetActive(true);
         GvrEventSystem.SetActive(true);
+        GvrButton.SetActive(true);
     }
 
     public static GameObject FindGameObjectByName(string name)
