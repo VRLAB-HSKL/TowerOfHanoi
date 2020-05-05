@@ -4,20 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// This class manages the discs and pole control
 /// </summary>
 public class ColliderPoleC : MonoBehaviour
 {
 
     #region Variables
-    
-    //
+
+    //Renderer for coloring the poles
     Renderer rend;
     
-    //
+    //count entered and leaving discs at pole c
     private int count;
 
-    //
+    // provides the current number of discs being played
+    public int actualGameStackSize;
+
+    //contains all disc objects that are currently on this pole 
     public List<GameObject> discPositions;
 
     #endregion
@@ -25,13 +28,14 @@ public class ColliderPoleC : MonoBehaviour
     #region Unity standard Methods
 
     /// <summary>
-    /// 
+    ///  init the starting attributes and the current number of discs
     /// </summary>
     private void Start()
     {
         rend = GetComponent<Renderer>();
         count = 0;
         discPositions = new List<GameObject>();
+        actualGameStackSize = GameObject.Find("ToH").GetComponent<GameToH>().GetMaxStackSizeForPoleC();
     }
 
     #endregion
@@ -39,9 +43,9 @@ public class ColliderPoleC : MonoBehaviour
     #region Collider-Event Methods
 
     /// <summary>
-    /// 
+    /// This method manages, checks and positions the incoming discs
     /// </summary>
-    /// <param name="other"></param>
+    /// <param name="other"> collider pole c </param>
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Hit: " + other.gameObject.name.ToString());
@@ -57,20 +61,20 @@ public class ColliderPoleC : MonoBehaviour
             StartCoroutine(AddDragItemSkript(other));
             count++;
             StartCoroutine(CheckGameState(other));
+            StartCoroutine(CheckGameIfFinished());
         }
     }
 
     /// <summary>
-    /// 
+    /// This method manages the outgoing discs
     /// </summary>
-    /// <param name="other"></param>
+    /// <param name="other"> collider pole c </param>
     private void OnTriggerExit(Collider other)
     {
+        
         rend.material.color = Color.white;
         if (other.gameObject.tag == "Disc")
         {
-            //GameObject.Find("ToH").GetComponent<GameToH>().SetOldDiscPosition(other.gameObject.transform.position);
-           // GameObject.Find("ToH").GetComponent<GameToH>().SetOldDiscPosition(other.transform.position);
             count--;
             discPositions.Remove(other.gameObject);
         }
@@ -80,47 +84,61 @@ public class ColliderPoleC : MonoBehaviour
 
     #region Coroutine
 
+    /// <summary>
+    /// Check if Game is Finished
+    /// </summary>
+    /// <returns> Suspends the coroutine execution for the given amount of seconds using scaled time. </returns>
+    IEnumerator CheckGameIfFinished()
+    {
+        if(actualGameStackSize == discPositions.Count)
+        {
+            Debug.Log("Game Finished");
+        }
+        else
+        {
+            Debug.Log("Game isnt Finished");
+        }
+                
+        yield return new WaitForSeconds(.1f);
+    }
 
+    /// <summary>
+    /// This coroutine delete the DragItem-Script from Object if a Disc entered the collider.
+    /// </summary>
+    /// <param name="other"> Collider Pole C </param>
+    /// <returns>No wait actually needed => null </returns>
     IEnumerator DeleteDragItemSkript(Collider other)
     {
         Destroy(other.gameObject.GetComponent<DragItem>());
-        /**
-        switch(other.gameObject.name) 
-        {
-            case "Disc1": Destroy(other.gameObject.GetComponent <DragItemDiscOne>()); break;
-            case "Disc2": Destroy(other.gameObject.GetComponent<DragItemDiscTwo>()); break;
-            case "Disc3": Destroy(other.gameObject.GetComponent<DragItemDiscThree>()); break;
-        }
-    */
-        yield return null;
-    }
-
-    IEnumerator AddDragItemSkript(Collider other)
-    {
-        other.gameObject.AddComponent<DragItem>();
-        /**
-        switch (other.gameObject.name)
-        {
-            case "Disc1": other.gameObject.AddComponent<DragItemDiscOne>(); break;
-            case "Disc2": other.gameObject.AddComponent<DragItemDiscTwo>(); break;
-            case "Disc3": other.gameObject.AddComponent<DragItemDiscThree>(); break;
-        }
-        */
         yield return null;
     }
 
     /// <summary>
-    /// 
+    /// After reposition the Disc the DragItem-Script added again to the collider entered disc and
+    /// allows the disc to drag again.
     /// </summary>
-    /// <param name="other"></param>
-    /// <returns></returns>
+    /// <param name="other"> collider pole c</param>
+    /// <returns> No wait actually needed => null </returns>
+    IEnumerator AddDragItemSkript(Collider other)
+    {
+        other.gameObject.AddComponent<DragItem>();
+        
+        yield return null;
+    }
+
+    /// <summary>
+    /// This coroutine checks if a disc that complies with the Tower of Hanoi rules and can be put on the stack.
+    /// If so, the necessary disc position is used. If the disc cannot be placed in its current position or on top of a disc,
+    /// it will be returned to its origin place.
+    /// </summary>
+    /// <param name="other"> collider pole c </param>
+    /// <returns> Suspends the coroutine execution for the given amount of seconds using scaled time.</returns>
     IEnumerator CheckGameState(Collider other)
     {
         bool gameFlag = GameObject.Find("ToH").GetComponent<GameToH>().CheckDiscPositions(discPositions);
-        Debug.Log("GameFlag: " + gameFlag);
+
         if (!gameFlag)
         {
-            //other.gameObject.transform.position = GameObject.Find("ToH").GetComponent<GameToH>().GetOldDiscPosition();
             other.gameObject.transform.position = GameObject.Find("ToH").GetComponent<DiscPositioning>().getPositions(other.gameObject.name);
         }
         else
@@ -134,9 +152,9 @@ public class ColliderPoleC : MonoBehaviour
 
     #region Disc positioning
     /// <summary>
-    /// 
+    /// This method represents the initially calculated positions of the discs
     /// </summary>
-    /// <returns></returns>
+    /// <returns> the initial disc positions of a disc </returns>
     private Vector3 GetDiscPositions()
     {
         Vector3 newCoords = new Vector3(0, 0, 0);
@@ -153,6 +171,6 @@ public class ColliderPoleC : MonoBehaviour
 
         return newCoords;
     }
-    #endregion
 
+    #endregion
 }

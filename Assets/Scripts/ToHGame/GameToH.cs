@@ -4,68 +4,69 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// This class contains the objects to be initialized, which are required by Tower of Hanoi.
+/// It also manages and configures the number of playable discs as well as checking player moves based on the given rule.
 /// </summary>
 public class GameToH : MonoBehaviour
 {
-  
+
     #region Variables
 
-    //
+    // contains calculated discs positions (Pole A)
     public Vector3[] poleApositions;
-    
-    //
+
+    // contains calculated discs positions (Pole B)
     public Vector3[] poleBpositions;
     
-    //
+    // contains calculated discs positions (Pole C)
     public Vector3[] poleCpositions;
     
-    //
+    // contains the prefab of three discs
     public GameObject Discs_3;
     
-    //
+    // contains the prefab of five discs
     public GameObject Discs_5;
     
-    //
+    // contains the prefab of seven discs
     public GameObject Discs_7;
     
-    //
+    // contains the pole a gameobject
     public GameObject Pole_A;
     
-    //
+    // contains the pole b gameobject
     public GameObject Pole_B;
     
-    //
+    // contains the pole c gameobject
     public GameObject Pole_C;
 
-    //
-    private Vector3 oldPosition;
+    // number of currently playable discs 
+    public int maxDiscStackSize;
 
 
     #endregion
 
     #region Unity-Standard-Methods
 
-    // Start is called before the first frame update
+   
     /// <summary>
-    /// 
+    /// Start is called before the first frame update
     /// </summary>
     void Start()
     {
-        oldPosition = new Vector3(0, 0, 0);
+       
     }
 
     /// <summary>
-    /// 
+    /// Setup the initial game state. The game starts in the initial state of -1 (all objects disabled).
     /// </summary>
     private void Awake()
     {
         ChangingGameState(-1);
     }
 
-    // Update is called once per frame
+    
     /// <summary>
-    /// 
+    /// Update is called once per frame
     /// </summary>
     void Update()
     {
@@ -77,9 +78,9 @@ public class GameToH : MonoBehaviour
     #region ChangeGameState-Methods
 
     /// <summary>
-    /// 
+    /// The game starts in the initial state of -1 (all objects disabled). With the controller input you can choose from 3.5 and 7 discs
     /// </summary>
-    /// <param name="DiscState"></param>
+    /// <param name="DiscState"> switching game state from controller input.</param>
     public void ChangingGameState(int DiscState)
     {
         if(DiscState == -1 )
@@ -100,9 +101,9 @@ public class GameToH : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    /// starts the desired game based on the passed variable
     /// </summary>
-    /// <param name="DiscState"></param>
+    /// <param name="DiscState"> starting value from controller input </param>
     private void SwitchGameState(int DiscState)
     {
         switch (DiscState)
@@ -118,9 +119,9 @@ public class GameToH : MonoBehaviour
     #region Coroutines
 
     /// <summary>
-    /// 
+    /// disable the poles
     /// </summary>
-    /// <returns></returns>
+    /// <returns> no wait actually needed => null </returns>
     IEnumerator disablePoles()
     {
         Destroy(Pole_A.GetComponent<ColliderPoleA>());
@@ -133,9 +134,9 @@ public class GameToH : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// enables the poles
     /// </summary>
-    /// <returns></returns>
+    /// <returns> no wait actually needed => null </returns>
     IEnumerator enablePoles()
     {
         Pole_A.AddComponent<ColliderPoleA>();
@@ -148,9 +149,10 @@ public class GameToH : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Inits the game with three discs
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Waits until the end of the frame after Unity has rendererd every Camera and GUI
+    /// ,just before displaying the frame on screen. </returns>
     IEnumerator startGameWithDiscOfThree()
     {
         Discs_5.SetActive(false);
@@ -158,13 +160,15 @@ public class GameToH : MonoBehaviour
         Discs_3.SetActive(true); 
         StartCoroutine(fillDisc3Positions());
         StartCoroutine(enablePoles());
-        yield return null;
+        maxDiscStackSize = 3;
+        yield return new WaitForEndOfFrame();
     }
 
     /// <summary>
-    /// 
+    /// Inits the game with five discs
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Waits until the end of the frame after Unity has rendererd every Camera and GUI
+    /// ,just before displaying the frame on screen. </returns>
     IEnumerator startGameWithDiscOfFive()
     {
         Discs_3.SetActive(false);
@@ -172,13 +176,15 @@ public class GameToH : MonoBehaviour
         Discs_5.SetActive(true);
         StartCoroutine(fillDisc5Positions());
         StartCoroutine(enablePoles());
-        yield return null;
+        maxDiscStackSize = 5;
+        yield return new WaitForEndOfFrame();
     }
 
     /// <summary>
-    /// 
+    /// Inits the Game with seven discs
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Waits until the end of the frame after Unity has rendererd every Camera and GUI
+    /// ,just before displaying the frame on screen. </returns>
     IEnumerator startGameWithDiscOfSeven()
     {
         Discs_3.SetActive(false);
@@ -186,13 +192,14 @@ public class GameToH : MonoBehaviour
         Discs_7.SetActive(true);
         StartCoroutine(fillDisc7Positions());
         StartCoroutine(enablePoles());
-        yield return null;
+        maxDiscStackSize = 7;
+        yield return new WaitForEndOfFrame();
     }
 
     /// <summary>
-    /// 
+    /// Calculates the starting positions of the discs at pole A and calculates the other positions at pole B and pole C.
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Suspends the coroutine execution for the given amount of seconds using scaled time. </returns>
     IEnumerator fillDisc3Positions()
     {
         poleApositions = new Vector3[3];
@@ -218,13 +225,13 @@ public class GameToH : MonoBehaviour
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[1], "Disc2");
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[2], "Disc3");
         
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(.1f);
     }
 
     /// <summary>
-    /// 
+    /// Calculates the starting positions of the discs at pole A and calculates the other positions at pole B and pole C.
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Suspends the coroutine execution for the given amount of seconds using scaled time. </returns>
     IEnumerator fillDisc5Positions()
     {
         poleApositions = new Vector3[5];
@@ -261,13 +268,13 @@ public class GameToH : MonoBehaviour
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[3], "Disc4");
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[4], "Disc5");
         
-        yield return null;
+        yield return new WaitForSeconds(.1f); 
     }
 
     /// <summary>
-    /// 
+    /// Calculates the starting positions of the discs at pole A and calculates the other positions at pole B and pole C.
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Suspends the coroutine execution for the given amount of seconds using scaled time. </returns>
     IEnumerator fillDisc7Positions()
     {
         poleApositions = new Vector3[7];
@@ -315,67 +322,59 @@ public class GameToH : MonoBehaviour
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[4], "Disc5");
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[5], "Disc6");
         GameObject.Find("ToH").GetComponent<DiscPositioning>().setDiscPostions(poleApositions[6], "Disc7");
-        yield return null;
+        yield return new WaitForSeconds(.1f);
     }
 
     #endregion
 
     #region Getter / Setter Disc-Positions
     /// <summary>
-    /// 
+    /// get specific positions as vector3 from Pole-A array.
     /// </summary>
-    /// <param name="i"></param>
-    /// <returns></returns>
+    /// <param name="i"> number to access array</param>
+    /// <returns> position as vector3 </returns>
     public Vector3 GetPoleAposition(int i)
     {
-        Debug.Log(i);
         return poleApositions[i];
     }
 
     /// <summary>
-    /// 
+    /// get specific positions as vector3 from Pole-B array.
     /// </summary>
-    /// <param name="i"></param>
-    /// <returns></returns>
+    /// <param name="i"> number to access array </param>
+    /// <returns> position as vector3 </returns>
     public Vector3 GetPoleBposition(int i)
     {
         return poleBpositions[i];
     }
 
     /// <summary>
-    /// 
+    /// get specific positions as vector3 from Pole-C array.
     /// </summary>
-    /// <param name="i"></param>
-    /// <returns></returns>
+    /// <param name="i"> number to access array </param>
+    /// <returns> position as vector3 </returns>
     public Vector3 GetPoleCposition(int i)
     {
         return poleCpositions[i];
     }
-    
+
     /// <summary>
-    /// 
+    /// number of currently playable discs
+    /// example: 3 Discs => return 3, 5 Discs => return 5, etc.
     /// </summary>
-    /// <param name="_oldPosition"></param>
-    public void SetOldDiscPosition(Vector3 _oldPosition)
+    /// <returns> number of currently playable discs </returns>
+    public int GetMaxStackSizeForPoleC()
     {
-        oldPosition = _oldPosition;
-        Debug.Log("GameToH-oldPosition: " + oldPosition.ToString());
+        return maxDiscStackSize;
     }
 
     /// <summary>
-    /// 
+    /// This method checks whether a moving disc at pole a / -b / -c can be placed there
+    /// or whether it violates the rule that no larger disc can be placed on a smaller one.
+    /// This is done by checking the object scales.
     /// </summary>
-    /// <returns></returns>
-    public Vector3 GetOldDiscPosition()
-    {
-        return oldPosition;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="gameobjects"></param>
-    /// <returns></returns>
+    /// <param name="gameobjects"> contains the game objects of the pole to be checked </param>
+    /// <returns> returns true or false based on the rules </returns>
     public bool CheckDiscPositions(List<GameObject> gameobjects)
     {
         if (!gameobjects.Any()) return true;

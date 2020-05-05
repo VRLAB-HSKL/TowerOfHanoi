@@ -1,10 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// This class contains the input control of the Windows standalone version
+/// </summary>
 public class KeyBoardController : MonoBehaviour
 {
+    // used to switch the game state between 3,5 and 7 discs
     private int changeState;
+
     // Start is called before the first frame update
     void Start()
     {

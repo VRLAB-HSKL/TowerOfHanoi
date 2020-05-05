@@ -2,23 +2,14 @@
 using UnityEngine;
 
 /// <summary>
-/// 
+/// This class contains the input control of the PC-Vive and Vive Focus Plus Android version
 /// </summary>
 public class SwitchGameState : MonoBehaviour
 {
 
     #region Variables
 
-    //
-    public GameObject Discs_3;
-    
-    //
-    public GameObject Discs_5;
-    
-    //
-    public GameObject Discs_7;
-
-    //
+    // int to switch game state between 3, 5 and 7 discs
     private int changeState;
 
     #endregion
@@ -46,7 +37,7 @@ public class SwitchGameState : MonoBehaviour
     #region Setup & Destroy Listeners
 
     /// <summary>
-    /// 
+    /// Add Listener [Right Hand][Grip-Button] to switch game state between 3, 5 and 7 discs
     /// </summary>
     private void Awake()
     {
@@ -54,7 +45,7 @@ public class SwitchGameState : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Destroy Listener [Right Hand][Grip-Button] to switch game state between 3, 5 and 7 discs
     /// </summary>
     private void OnDestroy()
     {
@@ -66,7 +57,7 @@ public class SwitchGameState : MonoBehaviour
     #region Change Game State via VIVE Controller
 
     /// <summary>
-    /// 
+    /// Method to switch game state between 3, 5 and 7 discs
     /// </summary>
     void ChangeGameState()
     {

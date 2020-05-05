@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// 
+/// This class contains the input control of the Android Cardboard version
 /// </summary>
 public class GvRChangeGameState : MonoBehaviour
 {
@@ -38,7 +36,7 @@ public class GvRChangeGameState : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Switching game mode between 3, 5 and 7 discs
     /// </summary>
     public void ChangeGameState()
     {

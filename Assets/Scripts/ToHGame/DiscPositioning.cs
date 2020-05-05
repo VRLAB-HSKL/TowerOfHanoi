@@ -1,11 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+
+/// <summary>
+/// Capture all disc positions
+/// </summary>
 public class DiscPositioning : MonoBehaviour
 {
-
-    public Vector3[] disc3positions; 
+    // contains all initial disc positions and the positions each disc after moving arround
+    public Vector3[] discPositions; 
 
     // Start is called before the first frame update
     void Start()
@@ -13,9 +15,12 @@ public class DiscPositioning : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// init the array with max playable discs.
+    /// </summary>
     private void Awake()
     {
-        disc3positions = new Vector3[7];
+        discPositions = new Vector3[7];
     }
 
     // Update is called once per frame
@@ -24,21 +29,31 @@ public class DiscPositioning : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Contains all initial positions at pole a and all positions when the discs are moved.
+    /// </summary>
+    /// <param name="_discPosition"> position of disc as vector3 </param>
+    /// <param name="name"> name of the disc which position has changed </param>
     public void setDiscPostions(Vector3 _discPosition, string name)
     {
         switch(name)
         {
-            case "Disc1": disc3positions[0] = _discPosition; break;
-            case "Disc2": disc3positions[1] = _discPosition; break;
-            case "Disc3": disc3positions[2] = _discPosition; break;
-            case "Disc4": disc3positions[3] = _discPosition; break;
-            case "Disc5": disc3positions[4] = _discPosition; break;
-            case "Disc6": disc3positions[5] = _discPosition; break;
-            case "Disc7": disc3positions[6] = _discPosition; break;
+            case "Disc1": discPositions[0] = _discPosition; break;
+            case "Disc2": discPositions[1] = _discPosition; break;
+            case "Disc3": discPositions[2] = _discPosition; break;
+            case "Disc4": discPositions[3] = _discPosition; break;
+            case "Disc5": discPositions[4] = _discPosition; break;
+            case "Disc6": discPositions[5] = _discPosition; break;
+            case "Disc7": discPositions[6] = _discPosition; break;
 
         }
     }
 
+    /// <summary>
+    /// this Method returns the old or current position of the disc based on the given name
+    /// </summary>
+    /// <param name="name"> disc name </param>
+    /// <returns> old / current position of the disc based on the given name </returns>
     public Vector3 getPositions(string name)
     {
         int count = 0; 
@@ -54,6 +69,6 @@ public class DiscPositioning : MonoBehaviour
 
         }
 
-        return disc3positions[count];
+        return discPositions[count];
     }
 }
