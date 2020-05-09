@@ -99,9 +99,9 @@ public class ColliderPoleA : MonoBehaviour
         discPositions.Add(other.gameObject);
         other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
         StartCoroutine(DeleteDragItemSkript(other));
-        Destroy(other.gameObject.GetComponent<BasicGrabbable>());
+        //Destroy(other.gameObject.GetComponent<BasicGrabbable>());
         other.gameObject.transform.position = GetDiscPositions();
-        other.gameObject.AddComponent<BasicGrabbable>();
+        //other.gameObject.AddComponent<BasicGrabbable>();
         StartCoroutine(AddDragItemSkript(other));
         count++;
         Debug.Log(count);
