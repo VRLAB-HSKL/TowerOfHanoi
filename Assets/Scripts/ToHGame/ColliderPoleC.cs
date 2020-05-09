@@ -1,4 +1,5 @@
 ﻿using HTC.UnityPlugin.Vive;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,8 @@ public class ColliderPoleC : MonoBehaviour
     //contains all disc objects that are currently on this pole 
     public List<GameObject> discPositions;
 
+    private string actualSceneName;
+
     #endregion
 
     #region Unity standard Methods
@@ -32,6 +35,7 @@ public class ColliderPoleC : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        actualSceneName = GameObject.Find("ToH").GetComponent<SceneManagment>().GetActiveSceneName();
         rend = GetComponent<Renderer>();
         count = 0;
         discPositions = new List<GameObject>();
@@ -52,17 +56,72 @@ public class ColliderPoleC : MonoBehaviour
         rend.material.color = Color.green;
         if (other.gameObject.tag == "Disc")
         {
-            discPositions.Add(other.gameObject);
-            other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-            StartCoroutine(DeleteDragItemSkript(other));
-            Destroy(other.gameObject.GetComponent<BasicGrabbable>());
-            other.gameObject.transform.position = GetDiscPositions();
-            other.gameObject.AddComponent<BasicGrabbable>();
-            StartCoroutine(AddDragItemSkript(other));
-            count++;
-            StartCoroutine(CheckGameState(other));
-            StartCoroutine(CheckGameIfFinished());
+            switch (actualSceneName)
+            {
+                case "ToH-VivePro": ViveGamePlay(other); break;
+                case "ToH-ViveFocus": ViveGamePlay(other); break;
+                case "ToH-Cardboard": CardboardGameplay(other); break;
+                case "ToH-PCStandalone": PCStandaloneGameplay(other); break;
+                case "ToH": RegularGamePlay(other); break;
+
+            }           
         }
+    }
+
+    private void RegularGamePlay(Collider other)
+    {
+        discPositions.Add(other.gameObject);
+        other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        StartCoroutine(DeleteDragItemSkript(other));
+        Destroy(other.gameObject.GetComponent<BasicGrabbable>());
+        other.gameObject.transform.position = GetDiscPositions();
+        other.gameObject.AddComponent<BasicGrabbable>();
+        StartCoroutine(AddDragItemSkript(other));
+        count++;
+        StartCoroutine(CheckGameState(other));
+        StartCoroutine(CheckGameIfFinished());
+    }
+
+    private void PCStandaloneGameplay(Collider other)
+    {
+        discPositions.Add(other.gameObject);
+        other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        StartCoroutine(DeleteDragItemSkript(other));
+        Destroy(other.gameObject.GetComponent<BasicGrabbable>());
+        other.gameObject.transform.position = GetDiscPositions();
+        other.gameObject.AddComponent<BasicGrabbable>();
+        StartCoroutine(AddDragItemSkript(other));
+        count++;
+        StartCoroutine(CheckGameState(other));
+        StartCoroutine(CheckGameIfFinished());
+    }
+
+    private void CardboardGameplay(Collider other)
+    {
+        discPositions.Add(other.gameObject);
+        other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        StartCoroutine(DeleteDragItemSkript(other));
+        Destroy(other.gameObject.GetComponent<BasicGrabbable>());
+        other.gameObject.transform.position = GetDiscPositions();
+        other.gameObject.AddComponent<BasicGrabbable>();
+        StartCoroutine(AddDragItemSkript(other));
+        count++;
+        StartCoroutine(CheckGameState(other));
+        StartCoroutine(CheckGameIfFinished());
+    }
+
+    private void ViveGamePlay(Collider other)
+    {
+        discPositions.Add(other.gameObject);
+        other.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        //StartCoroutine(DeleteDragItemSkript(other));
+        Destroy(other.gameObject.GetComponent<BasicGrabbable>());
+        other.gameObject.transform.position = GetDiscPositions();
+        other.gameObject.AddComponent<BasicGrabbable>();
+        //StartCoroutine(AddDragItemSkript(other));
+        count++;
+        StartCoroutine(CheckGameState(other));
+        StartCoroutine(CheckGameIfFinished());
     }
 
     /// <summary>
