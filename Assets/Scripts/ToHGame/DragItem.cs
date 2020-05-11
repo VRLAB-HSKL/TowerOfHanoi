@@ -55,6 +55,7 @@ public class DragItem : MonoBehaviour
         while (up == false)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
             Vector3 pos = ray.origin + (ray.direction * 1f/**4.7f*/);
             item.transform.position = pos;
             yield return new WaitForEndOfFrame();

@@ -82,7 +82,7 @@ PlayerSettings:
   resizableWindow: 0
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
-  gpuSkinning: 1
+  gpuSkinning: 0
   graphicsJobs: 1
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
@@ -394,9 +394,10 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Enabled: 1
     m_Devices:
-    - OpenVR
-    - Oculus
     - daydream
+    - Oculus
+    - OpenVR
+    - MockHMD
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0

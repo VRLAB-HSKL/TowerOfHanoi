@@ -21,6 +21,7 @@ public class ColliderPoleA : MonoBehaviour
     //contains all disc objects that are currently on this pole
     public List<GameObject> discPositions;
 
+    //contains acutal scene name
     public string actualSceneName;
 
     #endregion
@@ -66,6 +67,12 @@ public class ColliderPoleA : MonoBehaviour
         
     }
 
+    #region Crossplaform methods [WindowsX64, VivePro, ViveFocus, Cardboard]
+
+    /// <summary>
+    ///Behavior of using pole a with the original code without using separate scenes
+    /// </summary>
+    /// <param name="other">colider pole a</param>
     private void RegularGamePlay(Collider other)
     {
         discPositions.Add(other.gameObject);
@@ -80,6 +87,10 @@ public class ColliderPoleA : MonoBehaviour
         StartCoroutine(CheckGameState(other));
     }
 
+    /// <summary>
+    /// Behavior of using pole a with VivePro
+    /// </summary>
+    /// <param name="other"> colider pole a</param>
     private void ViveGamePlay(Collider other)
     {
         discPositions.Add(other.gameObject);
@@ -94,6 +105,10 @@ public class ColliderPoleA : MonoBehaviour
         StartCoroutine(CheckGameState(other));
     }
 
+    /// <summary>
+    /// Behavior of using pole a with Windows-Standalone
+    /// </summary>
+    /// <param name="other"> colider pole a </param>
     private void PCStandaloneGameplay(Collider other)
     {
         discPositions.Add(other.gameObject);
@@ -108,6 +123,10 @@ public class ColliderPoleA : MonoBehaviour
         StartCoroutine(CheckGameState(other));
     }
 
+    /// <summary>
+    /// Behavior of using pole a with Cardboard
+    /// </summary>
+    /// <param name="other">colider pole a</param>
     private void CardboardGameplay(Collider other)
     {
         discPositions.Add(other.gameObject);
@@ -121,6 +140,7 @@ public class ColliderPoleA : MonoBehaviour
         Debug.Log(count);
         StartCoroutine(CheckGameState(other));
     }
+    #endregion
 
     /// <summary>
     /// This method manages the outgoing discs
