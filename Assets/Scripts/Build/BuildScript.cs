@@ -5,6 +5,8 @@
 /// </summary>
 public class BuildScript
 {
+    #region Build-Methods [VivePro, ViveFocus, Cardboard, Windows-Standalone]
+   
     /// <summary>
     /// Build KeyBoard / Mouse WindowsX64
     /// </summary>
@@ -44,4 +46,6 @@ public class BuildScript
         BuildPipeline.BuildPlayer(defaultScene, "./builds/Android",
             BuildTarget.Android, BuildOptions.None);
     }
+
+    #endregion
 }

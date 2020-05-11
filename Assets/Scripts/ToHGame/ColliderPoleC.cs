@@ -24,6 +24,7 @@ public class ColliderPoleC : MonoBehaviour
     //contains all disc objects that are currently on this pole 
     public List<GameObject> discPositions;
 
+    //contains the actual scene name
     private string actualSceneName;
 
     #endregion
