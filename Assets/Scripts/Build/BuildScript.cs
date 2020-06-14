@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 
+/**
 /// <summary>
 /// Crossplatform Buildscript
 /// </summary>
@@ -48,4 +49,7 @@ public class BuildScript
     }
 
     #endregion
+
+    
 }
+**/

@@ -82,7 +82,7 @@ PlayerSettings:
   resizableWindow: 0
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
-  gpuSkinning: 1
+  gpuSkinning: 0
   graphicsJobs: 1
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
@@ -161,7 +161,7 @@ PlayerSettings:
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 25
-  AndroidTargetSdkVersion: 26
+  AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -394,7 +394,6 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Enabled: 1
     m_Devices:
-    - daydream
     - Oculus
     - OpenVR
     - MockHMD
@@ -635,7 +634,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: VIU_PLUGIN;VIU_WAVEVR;VIU_WAVEVR_2_0_32_OR_NEWER;VIU_WAVEVR_2_1_0_OR_NEWER;VIU_WAVEVR_3_0_0_OR_NEWER;VIU_WAVEVR_3_1_0_OR_NEWER;VIU_WAVEVR_3_1_3_OR_NEWER;CROSS_PLATFORM_INPUT;VIU_GOOGLEVR;VIU_GOOGLEVR_1_150_0_NEWER
     4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    7: VIU_WAVEVR;VIU_WAVEVR_2_0_32_OR_NEWER;VIU_WAVEVR_2_1_0_OR_NEWER;VIU_WAVEVR_3_0_0_OR_NEWER;VIU_WAVEVR_3_1_0_OR_NEWER;VIU_WAVEVR_3_1_3_OR_NEWER;VIU_PLUGIN;WAVEVR_SINGLEPASS_ENABLED;CROSS_PLATFORM_INPUT;MOBILE_INPUT;VIU_GOOGLEVR;VIU_GOOGLEVR_1_150_0_NEWER;VIU_GOOGLEVR_SUPPORT
+    7: VIU_WAVEVR;VIU_WAVEVR_2_0_32_OR_NEWER;VIU_WAVEVR_2_1_0_OR_NEWER;VIU_WAVEVR_3_0_0_OR_NEWER;VIU_WAVEVR_3_1_0_OR_NEWER;VIU_WAVEVR_3_1_3_OR_NEWER;VIU_PLUGIN;WAVEVR_SINGLEPASS_ENABLED;CROSS_PLATFORM_INPUT;MOBILE_INPUT;VIU_GOOGLEVR;VIU_GOOGLEVR_1_150_0_NEWER;VIU_SIUMULATOR_SUPPORT;VIU_WAVEVR_SUPPORT
     14: MOBILE_INPUT
   platformArchitecture: {}
   scriptingBackend: {}
